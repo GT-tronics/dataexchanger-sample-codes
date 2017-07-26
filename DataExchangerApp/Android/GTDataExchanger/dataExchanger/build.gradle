@@ -1,0 +1,38 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+
+android {
+    compileSdkVersion 21
+    buildToolsVersion '25.0.0'
+
+    defaultConfig {
+        applicationId "com.gttronics.ble.dataexchanger"
+        minSdkVersion 18
+        targetSdkVersion 20
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+}
+
+dependencies {
+    //compile project(':bLELibrary')
+    //compile (name:'bLELibrary-release', ext:'aar')
+    compile 'com.android.support:support-v4:21.0.3'
+    //compile 'com.gttronics.ble.blelibrary:blelibrary-release@aar'
+    compile 'com.android.support:appcompat-v7:21.0.3'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation project(':bLELibrary-release')
+}
+repositories {
+    mavenCentral()
+}
+
+apply plugin: 'kotlin-android-extensions'

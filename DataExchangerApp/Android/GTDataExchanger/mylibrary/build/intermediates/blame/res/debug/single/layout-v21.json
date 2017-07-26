@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "/Users/samuelcatherasoo/Developer/gtTronics/dataexchanger_20170321_src/App/mylibrary/build/intermediates/res/merged/debug/layout-v21/notification_template_custom_big.xml",
+        "source": "/Users/samuelcatherasoo/.gradle/caches/transforms-1/files-1.1/appcompat-v7-25.3.1.aar/7d921f019df5e01cb4155696fa49589d/res/layout-v21/notification_template_custom_big.xml"
+    },
+    {
+        "merged": "/Users/samuelcatherasoo/Developer/gtTronics/dataexchanger_20170321_src/App/mylibrary/build/intermediates/res/merged/debug/layout-v21/notification_action_tombstone.xml",
+        "source": "/Users/samuelcatherasoo/.gradle/caches/transforms-1/files-1.1/appcompat-v7-25.3.1.aar/7d921f019df5e01cb4155696fa49589d/res/layout-v21/notification_action_tombstone.xml"
+    },
+    {
+        "merged": "/Users/samuelcatherasoo/Developer/gtTronics/dataexchanger_20170321_src/App/mylibrary/build/intermediates/res/merged/debug/layout-v21/notification_action.xml",
+        "source": "/Users/samuelcatherasoo/.gradle/caches/transforms-1/files-1.1/appcompat-v7-25.3.1.aar/7d921f019df5e01cb4155696fa49589d/res/layout-v21/notification_action.xml"
+    },
+    {
+        "merged": "/Users/samuelcatherasoo/Developer/gtTronics/dataexchanger_20170321_src/App/mylibrary/build/intermediates/res/merged/debug/layout-v21/notification_template_icon_group.xml",
+        "source": "/Users/samuelcatherasoo/.gradle/caches/transforms-1/files-1.1/appcompat-v7-25.3.1.aar/7d921f019df5e01cb4155696fa49589d/res/layout-v21/notification_template_icon_group.xml"
+    }
+]

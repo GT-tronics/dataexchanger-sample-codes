@@ -1,0 +1,2 @@
+include ':bLELibrary', ':bLELibrary-release'
+include ':dataExchanger'
