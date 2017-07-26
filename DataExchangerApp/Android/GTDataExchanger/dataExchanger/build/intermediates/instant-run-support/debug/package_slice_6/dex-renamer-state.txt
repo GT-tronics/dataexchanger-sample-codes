@@ -1,4 +1,0 @@
-#Wed Jul 26 13:35:39 EDT 2017
-base.0=/Users/samuelcatherasoo/Developer/gtTronics/github/dataexchanger-sample-codes/DataExchangerApp/Android/GTDataExchanger/dataExchanger/build/intermediates/transforms/dexMerger/debug/28
-renamed.0=classes.dex
-file.0=/Users/samuelcatherasoo/Developer/gtTronics/github/dataexchanger-sample-codes/DataExchangerApp/Android/GTDataExchanger/dataExchanger/build/intermediates/transforms/dexMerger/debug/28/classes.dex
