@@ -1,0 +1,295 @@
+//
+//  MainActivity.java
+//  DataExchanger
+//
+//  Created by Ming Leung on 2014-08-01.
+//  Copyright (c) 2014 GT-Tronics HK Ltd. All rights reserved.
+//
+
+package com.gttronics.ble.dataexchanger;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnKeyListener;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import com.gttronics.ble.blelibrary.*;
+import com.gttronics.ble.blelibrary.dataexchanger.*;
+
+public class MainActivity extends Activity {
+
+	private BleController bleCtlr;
+	private DataExchangerProfile dxProfile;
+	private BleDevice dxDev;
+	private EditText editTextRx;
+	private EditText editTextTx;
+	private TextView textViewRx;
+	private TextView textViewTx;
+	private byte[] rxData;
+	
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		
+		startBle();
+		
+		setContentView(R.layout.activity_main);
+
+		editTextRx = (EditText) findViewById(R.id.editTextRx);
+		textViewRx = (TextView) findViewById(R.id.textViewRx);
+		editTextTx = (EditText) findViewById(R.id.editTextTx);
+		textViewTx = (TextView) findViewById(R.id.textViewTx);
+		
+		editTextRx.setKeyListener(null);
+		
+		runOnUiThread(new Runnable() {
+		     public void run() {
+				editTextRx.setText("Searching for devices ...");
+				editTextTx.setText("");
+				
+				editTextTx.requestFocus();
+				
+				editTextTx.setVisibility(View.GONE);				
+				textViewTx.setVisibility(View.GONE);
+		     }
+		});
+		
+		editTextTx.setOnKeyListener(new OnKeyListener() {
+			public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+				String txString = (editTextTx.getText().toString());
+				if (event.getAction() == KeyEvent.ACTION_UP )
+				{
+					if (keyCode == KeyEvent.KEYCODE_ENTER)
+					{
+						// Send data to the connected device
+						byte[] bytes = txString.getBytes();
+						if( bytes.length > 0 )
+						{
+							dxProfile.sendData(bytes);
+						}
+						Log.d("MAIN", "Tx Data [" + txString + "]");
+					}
+					else if( keyCode == KeyEvent.KEYCODE_DEL )
+					{
+						editTextTx.setText("");
+					}
+				}
+			
+				return true;
+			}
+	    });
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle action bar item clicks here. The action bar will
+		// automatically handle clicks on the Home/Up button, so long
+		// as you specify a parent activity in AndroidManifest.xml.
+		int id = item.getItemId();
+		if (id == R.id.action_settings) {
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+	
+	private void startBle() 
+	{
+		bleCtlr = null;
+		dxDev = null;
+		dxProfile = null;
+				
+		// Create BLE Controller
+		bleCtlr = BleController.getInstance(this.getApplicationContext()); 
+		
+		// alert user if BLE is supported by device
+		if (!bleCtlr.isBleSupport()) {
+			new AlertDialog.Builder(this)
+			.setMessage("BLE not supported by this device.")
+			.setTitle("Data Exchanger")
+			.setNeutralButton(android.R.string.cancel,
+					new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int whichButton){
+					        int pid = android.os.Process.myPid();
+					        android.os.Process.killProcess(pid);
+					        System.exit(0);        	 
+						}
+					}
+			).show();
+			
+			return;
+		}
+		
+		// alert user if BLE is not enabled
+		if (!bleCtlr.isBluetoothEnabled()){
+			new AlertDialog.Builder(this)
+			.setMessage("Bluetooth is disabled. Press OK to enable.")
+			.setTitle("Data Exchanger")
+			.setPositiveButton(android.R.string.cancel,
+					new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int whichButton){
+					        int pid = android.os.Process.myPid();
+					        android.os.Process.killProcess(pid);
+					        System.exit(0);	        	 
+						}
+					}
+			)
+			.setNegativeButton(android.R.string.ok,
+					new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int whichButton){
+							Intent intentOpenBluetoothSettings = new Intent();
+							intentOpenBluetoothSettings.setAction(android.provider.Settings.ACTION_BLUETOOTH_SETTINGS); 
+							startActivity(intentOpenBluetoothSettings);         	 
+						}
+					}
+			)
+			.show();
+			
+			return;
+		}
+		
+		// Create DataExchanger Device
+		// - required callback functions are:
+		//   1/ onDeviceStateChanged - called when device state changed
+		//   2/ onAllProfilesReady - called when all profiles ready (discovered)
+		//      - this is the point where the app can start interaction with the BLE device.
+		//
+		dxDev = new DataExchangerDevice(this.getApplicationContext(), new BleDeviceCallback()
+		{
+			@Override
+		    public void onDeviceStateChanged(BleDevice dev, BLE_DEV_STATE state)
+			{
+				Log.d("MAIN", "State:" + state);
+				
+				// Device is discovered and connected but its service has not been discovered
+				if( state == BLE_DEV_STATE.CONNECTED_NOT_SVC_RDY )
+				{
+					runOnUiThread(new Runnable() {
+					     public void run() {
+					    	 editTextRx.setText("Device Found");
+					    	 editTextTx.setText("");
+
+					    	 editTextTx.setVisibility(View.GONE);
+					    	 textViewTx.setVisibility(View.GONE);					     
+					     }
+					});
+					
+					// Stop discovery scan if a device is connected
+					bleCtlr.stopScan();
+				}
+				
+				// Device is disconnected
+				else if( state == BLE_DEV_STATE.DISCONNECTED )
+				{
+					runOnUiThread(new Runnable() {
+						public void run() {
+					    	 editTextRx.setText("Searching for devices ...");
+					    	 editTextTx.setText("");					    	 
+					    	 
+					    	 editTextTx.setVisibility(View.GONE);
+					    	 textViewTx.setVisibility(View.GONE);					     
+						}
+					});
+					
+					// Re-enable device discovery
+					// - ready to connect to a new device.
+					bleCtlr.startScan();
+				}
+			}
+			
+			@Override
+		    public void onAllProfilesReady(BleDevice dev, boolean isAllReady)
+			{
+				if( isAllReady )
+				{					
+					// App is ready to interact with the BLE device.
+					// - place your code here to start working with the device
+					//
+					runOnUiThread(new Runnable() {
+					     public void run() {
+							editTextRx.setText("");
+							
+							editTextTx.setVisibility(View.VISIBLE);
+							textViewTx.setVisibility(View.VISIBLE);
+					     }
+					});
+					
+					Log.d("MAIN", "All profiles are ready.");
+				}
+				else
+				{						
+					// If not ready, do some error handling here
+					Log.d("MAIN", "Not all profiles are ready.");
+					dev.close();
+				}
+			}
+		});
+
+		// Create DataExchanger profile
+		// - required callback functions are:
+		//   1/ onRxDataAvailable - called when data is sent from the connected BLE device
+		// - use dxProfile.sendData() function to send data
+		dxProfile = new DataExchangerProfile(dxDev, new DataExchangerProfileCallback()
+		{			
+			@Override
+			public void onRxDataAvailable(BleDevice dev, byte[] data)
+			{
+				rxData = data;
+				
+				// Place your code here to handle the received data
+				//
+				
+				runOnUiThread(new Runnable() {
+					public void run() {				
+						Date currentLocalTime = Calendar.getInstance().getTime();
+						SimpleDateFormat simpleDateFormat = new java.text.SimpleDateFormat("mm::ss::SSS");
+						String formattedCurrentDate = simpleDateFormat.format(currentLocalTime);			    
+				    	 
+						String rxString = formattedCurrentDate + ":" + new String(rxData) + "\n" + editTextRx.getText().toString();
+
+						editTextRx.setText(rxString);
+				    	Log.d("MAIN", "Rx Data [" + new String(rxData) +"]");
+				     }
+				});
+				
+			}
+		});
+		
+		dxProfile.reset();
+		
+		// Assign profile to device
+		dxDev.registerProfile(dxProfile);
+		
+		// Assign device to controller
+		bleCtlr.registerDevice(dxDev);
+		
+		// Start Device Discovery
+		bleCtlr.startScan();			
+		
+	}
+	
+	protected void alertbox(String title, String mymessage) {
+
+	}
+}

@@ -1,0 +1,6 @@
+COMMAND=PREDEX_LIBRARY_TO_DEX_ARCHIVE
+FILE_PATH=/Users/samuelcatherasoo/Developer/gtTronics/dataexchanger_20170321_src/App/dataExchanger/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar
+FILE_HASH=0fbccb041f68a23dc685500b4dc96967183ebf56
+DX_VERSION=1.13
+JUMBO_MODE=true
+OPTIMIZE=true

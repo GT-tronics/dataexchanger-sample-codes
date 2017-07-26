@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main"><source path="/Users/samuelcatherasoo/Developer/gtTronics/github/dataexchanger-sample-codes/DataExchangerApp/Android/GTDataExchanger/dataExchanger/src/main/jniLibs"/></dataSet><dataSet config="release"><source path="/Users/samuelcatherasoo/Developer/gtTronics/github/dataexchanger-sample-codes/DataExchangerApp/Android/GTDataExchanger/dataExchanger/src/release/jniLibs"/></dataSet></merger>

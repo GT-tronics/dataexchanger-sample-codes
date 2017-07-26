@@ -1,0 +1,50 @@
+[
+    {
+        "outputFile": "/Users/samuelcatherasoo/Developer/gtTronics/dataexchanger_20170321_src/App/mylibrary/build/intermediates/incremental/mergeDebugResources/merged.dir/values-port/values-port.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 55,
+                    "endOffset": 106
+                },
+                "from": {
+                    "file": "/Users/samuelcatherasoo/.gradle/caches/transforms-1/files-1.1/appcompat-v7-25.3.1.aar/7d921f019df5e01cb4155696fa49589d/res/values-port/values-port.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 55,
+                        "endColumn": 55,
+                        "endOffset": 106
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "outputFile": "/Users/samuelcatherasoo/Developer/gtTronics/dataexchanger_20170321_src/App/mylibrary/build/intermediates/res/merged/debug/values-port/values-port.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 55,
+                    "endOffset": 106
+                },
+                "from": {
+                    "file": "/Users/samuelcatherasoo/.gradle/caches/transforms-1/files-1.1/appcompat-v7-25.3.1.aar/7d921f019df5e01cb4155696fa49589d/res/values-port/values-port.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 55,
+                        "endColumn": 55,
+                        "endOffset": 106
+                    }
+                }
+            }
+        ]
+    }
+]

@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main"><source path="/Users/samuelcatherasoo/Developer/gtTronics/github/dataexchanger-sample-codes/DataExchangerApp/Android/GTDataExchanger/dataExchanger/src/main/shaders"/></dataSet><dataSet config="debug"><source path="/Users/samuelcatherasoo/Developer/gtTronics/github/dataexchanger-sample-codes/DataExchangerApp/Android/GTDataExchanger/dataExchanger/src/debug/shaders"/></dataSet></merger>
