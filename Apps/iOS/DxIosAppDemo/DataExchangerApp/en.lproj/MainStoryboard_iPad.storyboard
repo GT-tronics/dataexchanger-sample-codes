@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="Hof-EP-joX">
+    <device id="ipad9_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Tab Bar Controller-->
+        <scene sceneID="pks-aX-79B">
+            <objects>
+                <tabBarController id="Hof-EP-joX" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="7fB-MQ-8AR">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="uXE-V2-z7M" kind="relationship" relationship="viewControllers" id="l4f-Vp-7FG"/>
+                        <segue destination="fyT-7j-XeI" kind="relationship" relationship="viewControllers" id="GlS-qb-8AD"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ss3-7e-F3f" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-770" y="3139"/>
+        </scene>
+        <!--Command-->
+        <scene sceneID="wEm-Xf-znX">
+            <objects>
+                <navigationController id="fyT-7j-XeI" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Command" id="u0j-bc-LEv"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="QTB-uf-aX8">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="EqN-iK-38r" kind="relationship" relationship="rootViewController" id="WXt-wd-cIb"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9T5-to-5cm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="324" y="2402"/>
+        </scene>
+        <!--Command VC-->
+        <scene sceneID="52A-In-g41">
+            <objects>
+                <viewController title="Command VC" id="EqN-iK-38r" customClass="DxAppCommandVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Q55-pJ-pvm"/>
+                        <viewControllerLayoutGuide type="bottom" id="03f-Mq-mYb"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="xab-CH-HXj">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WAp-ED-r3j">
+                                <rect key="frame" x="56" y="184" width="656" height="513"/>
+                                <color key="backgroundColor" red="0.79644097219999999" green="0.79644097219999999" blue="0.79644097219999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="CourierNewPSMT" family="Courier New" pointSize="22"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                            </textView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="[Enter at-cmd and hit return to send]" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="al2-Er-gEW">
+                                <rect key="frame" x="56" y="800" width="656" height="30"/>
+                                <color key="backgroundColor" red="0.99607843139999996" green="0.90588235289999997" blue="0.035294117649999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                                <connections>
+                                    <outlet property="delegate" destination="EqN-iK-38r" id="Unu-c3-b5L"/>
+                                </connections>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.26543186689999998" blue="0.55632496840000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="al2-Er-gEW" firstAttribute="leading" secondItem="xab-CH-HXj" secondAttribute="leadingMargin" constant="36" id="63O-Xt-Wlk"/>
+                            <constraint firstItem="al2-Er-gEW" firstAttribute="bottom" secondItem="03f-Mq-mYb" secondAttribute="top" constant="-145" id="8sz-8a-3PX"/>
+                            <constraint firstItem="WAp-ED-r3j" firstAttribute="leading" secondItem="xab-CH-HXj" secondAttribute="leadingMargin" constant="36" id="DvD-eK-WmR"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="WAp-ED-r3j" secondAttribute="trailing" constant="36" id="O6v-Ax-zou"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="al2-Er-gEW" secondAttribute="trailing" constant="36" id="iTM-Rh-igr"/>
+                            <constraint firstItem="WAp-ED-r3j" firstAttribute="top" secondItem="Q55-pJ-pvm" secondAttribute="bottom" constant="90" id="mDv-H5-WtQ"/>
+                            <constraint firstItem="al2-Er-gEW" firstAttribute="top" secondItem="WAp-ED-r3j" secondAttribute="bottom" constant="103" id="oFR-g3-Pia"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="COMMAND CHANNEL" prompt="DataExchangerAT" id="cfe-er-hiA">
+                        <barButtonItem key="leftBarButtonItem" image="ble-38x24.png" id="wuo-FH-fPu">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="cmdTxtField" destination="al2-Er-gEW" id="cO7-ro-6Gf"/>
+                        <outlet property="cmdTxtFieldBC" destination="8sz-8a-3PX" id="mrf-8k-03c"/>
+                        <outlet property="rspTxtView" destination="WAp-ED-r3j" id="57x-Bi-ale"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2wJ-9X-6oX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1243" y="2402"/>
+        </scene>
+        <!--Data-->
+        <scene sceneID="mTs-Co-jaO">
+            <objects>
+                <navigationController id="uXE-V2-z7M" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Data" id="u3t-fa-Hst"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="v0n-4Z-aCk">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Nfx-6U-fye" kind="relationship" relationship="rootViewController" id="hjU-mu-mtS"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VuQ-hI-eel" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="324" y="3581"/>
+        </scene>
+        <!--Data VC-->
+        <scene sceneID="moc-iL-3ks">
+            <objects>
+                <viewController title="Data VC" id="Nfx-6U-fye" customClass="DxAppDataVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="A9y-rM-3jB"/>
+                        <viewControllerLayoutGuide type="bottom" id="nFV-50-u6I"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="YPA-gR-ij5">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wzz-Sd-gWR">
+                                <rect key="frame" x="56" y="184" width="656" height="513"/>
+                                <color key="backgroundColor" red="0.79644097219999999" green="0.79644097219999999" blue="0.79644097219999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="CourierNewPSMT" family="Courier New" pointSize="22"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                            </textView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="[Enter text and hit return to send]" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Hfd-TI-197">
+                                <rect key="frame" x="56" y="800" width="656" height="30"/>
+                                <color key="backgroundColor" red="0.99607843139999996" green="0.90588235289999997" blue="0.035294117649999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Nfx-6U-fye" id="kIb-dn-w8X"/>
+                                </connections>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.26543186689999998" blue="0.55632496840000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Hfd-TI-197" firstAttribute="bottom" secondItem="nFV-50-u6I" secondAttribute="top" constant="-145" id="4LU-HR-Y7q"/>
+                            <constraint firstItem="Hfd-TI-197" firstAttribute="top" secondItem="wzz-Sd-gWR" secondAttribute="bottom" constant="103" id="4T9-uu-vl2"/>
+                            <constraint firstItem="wzz-Sd-gWR" firstAttribute="leading" secondItem="YPA-gR-ij5" secondAttribute="leadingMargin" constant="36" id="6ue-ey-wDQ"/>
+                            <constraint firstItem="wzz-Sd-gWR" firstAttribute="top" secondItem="A9y-rM-3jB" secondAttribute="bottom" constant="90" id="DKM-hP-KTa"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="wzz-Sd-gWR" secondAttribute="trailing" constant="36" id="G6R-dy-tNq"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Hfd-TI-197" secondAttribute="trailing" constant="36" id="LrQ-F7-NEz"/>
+                            <constraint firstItem="Hfd-TI-197" firstAttribute="leading" secondItem="YPA-gR-ij5" secondAttribute="leadingMargin" constant="36" id="YLV-Sc-U03"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="DATA CHANNEL" prompt="DataExchangerAT" id="pgm-A8-fm3">
+                        <barButtonItem key="leftBarButtonItem" image="ble-38x24.png" id="XgW-in-m9t">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Hex" id="Ngp-B6-DFF">
+                            <connections>
+                                <action selector="changeDisplayMode:" destination="Nfx-6U-fye" id="E9G-JU-af7"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="dispModeBtn" destination="Ngp-B6-DFF" id="31j-ho-8o8"/>
+                        <outlet property="rxTxtView" destination="wzz-Sd-gWR" id="dmp-Vc-h9x"/>
+                        <outlet property="txTxtField" destination="Hfd-TI-197" id="Fz0-Ta-S8r"/>
+                        <outlet property="txTxtFieldBC" destination="4LU-HR-Y7q" id="gc7-4k-ei5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5qa-iI-ttt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1243" y="3581"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="ble-38x24.png" width="38" height="24"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination"/>
+    </simulatedMetricsContainer>
+</document>

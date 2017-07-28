@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="mch-qs-Jwv">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Data-->
+        <scene sceneID="Im5-W6-sud">
+            <objects>
+                <navigationController id="5Tm-mn-CkX" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Data" id="vT7-GC-Ffw"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="zq0-6N-GTC">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="doa-Ip-FPc" kind="relationship" relationship="rootViewController" id="LGe-ao-l1C"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Aye-Hw-eIW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="580" y="922"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="QEZ-Mr-2zT">
+            <objects>
+                <tabBarController id="mch-qs-Jwv" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="ivT-NQ-ddq">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="5Tm-mn-CkX" kind="relationship" relationship="viewControllers" id="TVb-Dw-dTB"/>
+                        <segue destination="ETZ-9b-Yu5" kind="relationship" relationship="viewControllers" id="gy8-Z4-hut"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TvG-4Y-A2Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="125" y="1561"/>
+        </scene>
+        <!--Command-->
+        <scene sceneID="Z1X-l8-smo">
+            <objects>
+                <navigationController id="ETZ-9b-Yu5" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Command" id="gT5-Az-N3o"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Vp3-9W-9t8">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Grb-eP-K4j" kind="relationship" relationship="rootViewController" id="6di-t3-FAn"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hA7-BQ-als" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="580" y="1561"/>
+        </scene>
+        <!--Data VC-->
+        <scene sceneID="Vsc-DM-PgI">
+            <objects>
+                <viewController title="Data VC" id="doa-Ip-FPc" customClass="DxAppDataVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="owT-3r-OhK"/>
+                        <viewControllerLayoutGuide type="bottom" id="Nur-nl-RdQ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="7H9-SX-Ucl">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pbm-i2-rvE">
+                                <rect key="frame" x="26" y="114" width="323" height="420"/>
+                                <color key="backgroundColor" red="0.8415206755050505" green="0.8415206755050505" blue="0.8415206755050505" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="CourierNewPSMT" family="Courier New" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no"/>
+                            </textView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="[Enter text and hit return to send]" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kdW-cU-9vL">
+                                <rect key="frame" x="26" y="548" width="323" height="30"/>
+                                <color key="backgroundColor" red="1" green="0.9135209477999342" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                                <connections>
+                                    <outlet property="delegate" destination="doa-Ip-FPc" id="TWj-5g-3a3"/>
+                                </connections>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.26543186689999998" blue="0.55632496840000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="kdW-cU-9vL" firstAttribute="leading" secondItem="7H9-SX-Ucl" secondAttribute="leadingMargin" constant="10" id="4kX-e9-eA8"/>
+                            <constraint firstItem="Pbm-i2-rvE" firstAttribute="top" secondItem="owT-3r-OhK" secondAttribute="bottom" constant="20" id="6aR-F3-xgH"/>
+                            <constraint firstItem="kdW-cU-9vL" firstAttribute="top" secondItem="Pbm-i2-rvE" secondAttribute="bottom" constant="14" id="Ic1-KR-LMH"/>
+                            <constraint firstItem="kdW-cU-9vL" firstAttribute="bottom" secondItem="Nur-nl-RdQ" secondAttribute="top" constant="-40" id="RXl-xT-rJw"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="kdW-cU-9vL" secondAttribute="trailing" constant="10" id="evZ-hb-Mn4"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Pbm-i2-rvE" secondAttribute="trailing" constant="10" id="kp5-Hi-KWa"/>
+                            <constraint firstItem="Pbm-i2-rvE" firstAttribute="leading" secondItem="7H9-SX-Ucl" secondAttribute="leadingMargin" constant="10" id="nv3-ih-BAi"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="DATA TERMINAL" prompt="DataExchangerAT" id="Jr6-3K-KZ3">
+                        <barButtonItem key="leftBarButtonItem" image="ble-38x24.png" id="mhQ-hb-dhH">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Hex" id="Dvw-7E-FRO">
+                            <connections>
+                                <action selector="changeDisplayMode:" destination="doa-Ip-FPc" id="vlG-Bc-PAm"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="dispModeBtn" destination="Dvw-7E-FRO" id="ff1-8y-J6W"/>
+                        <outlet property="rxTxtView" destination="Pbm-i2-rvE" id="L9j-ve-W4V"/>
+                        <outlet property="txTxtField" destination="kdW-cU-9vL" id="Sme-wd-Un8"/>
+                        <outlet property="txTxtFieldBC" destination="RXl-xT-rJw" id="q6e-2s-5hT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vLV-fi-8Op" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1081" y="745"/>
+        </scene>
+        <!--Command VC-->
+        <scene sceneID="d0U-Oi-jwc">
+            <objects>
+                <viewController title="Command VC" id="Grb-eP-K4j" customClass="DxAppCommandVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="twB-7b-LaJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="S9T-5k-IuY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hdC-u0-ezv">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jOs-H0-nB2">
+                                <rect key="frame" x="26" y="114" width="323" height="420"/>
+                                <color key="backgroundColor" red="0.79644097219999999" green="0.79644097219999999" blue="0.79644097219999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="CourierNewPSMT" family="Courier New" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="[Enter at-cmd and hit return to send]" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LET-zG-fqT">
+                                <rect key="frame" x="26" y="548" width="323" height="30"/>
+                                <color key="backgroundColor" red="0.99607843137254903" green="0.90588235294117647" blue="0.035294117647058823" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Grb-eP-K4j" id="Vu8-VG-ojr"/>
+                                </connections>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.26543186686332143" blue="0.55632496843434343" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="jOs-H0-nB2" firstAttribute="leading" secondItem="hdC-u0-ezv" secondAttribute="leadingMargin" constant="10" id="Cp7-NL-NhR"/>
+                            <constraint firstItem="LET-zG-fqT" firstAttribute="top" secondItem="jOs-H0-nB2" secondAttribute="bottom" constant="14" id="X5r-DK-51F"/>
+                            <constraint firstItem="LET-zG-fqT" firstAttribute="leading" secondItem="hdC-u0-ezv" secondAttribute="leadingMargin" constant="10" id="bge-lB-qLG"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="LET-zG-fqT" secondAttribute="trailing" constant="10" id="bgk-f4-FrC"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="jOs-H0-nB2" secondAttribute="trailing" constant="10" id="stD-kL-eOP"/>
+                            <constraint firstItem="LET-zG-fqT" firstAttribute="bottom" secondItem="S9T-5k-IuY" secondAttribute="top" constant="-40" id="vRz-Fd-c6D"/>
+                            <constraint firstItem="jOs-H0-nB2" firstAttribute="top" secondItem="twB-7b-LaJ" secondAttribute="bottom" constant="20" id="vjX-mk-PcN"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="COMMAND TERMINAL" prompt="DataExchangerAT" id="fUf-Ce-M4D">
+                        <barButtonItem key="leftBarButtonItem" image="ble-38x24.png" id="btW-gQ-s5V">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="cmdTxtField" destination="LET-zG-fqT" id="gYO-LP-i2f"/>
+                        <outlet property="cmdTxtFieldBC" destination="vRz-Fd-c6D" id="Uc8-CB-S5W"/>
+                        <outlet property="rspTxtView" destination="jOs-H0-nB2" id="W2z-ia-vrO"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6Pi-LA-WI6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1081" y="1501"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="ble-38x24.png" width="38" height="24"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
+    </simulatedMetricsContainer>
+</document>
