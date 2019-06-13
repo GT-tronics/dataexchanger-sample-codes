@@ -76,6 +76,7 @@
     //     the dclaration.
     //
     
+#if 0
     NSArray* cuuids = [adv objectForKey:CBAdvertisementDataServiceUUIDsKey];
     BOOL matched = NO;
     
@@ -92,6 +93,7 @@
     {
         return -1;
     }
+#endif
     
     NSLog(@"INFO: Peripheral[%@] discovered [RSSI=%@]", [uuid UUIDString], rssi);
     

@@ -5,7 +5,7 @@
 //  Created by Ming Leung on 12-12-12.
 //  Copyright (c) 2012 GT-Tronics HK Ltd. All rights reserved.
 //
-//  $Rev: 53 $
+//  $Rev: 57 $
 //
 
 
@@ -26,7 +26,9 @@ extern NSString* const kDXI2cSetupUUID;
 //Init
 //
 - (BLEProfile*) initWithDevice:(BLEDevice*)device andAppDelegate:(id<DataExchangerProfileProtocol>)appDelegate;
+- (BLEProfile*) initWithDevice:(BLEDevice*)device andAppDelegate:(id<DataExchangerProfileProtocol>)delegate andServiceUUIDStrings:(NSArray*)suuidStrs;
 + (BLEProfile*) profileWithDevice:(BLEDevice*)device andAppDelegate:(id<DataExchangerProfileProtocol>)appDelegate;
++ (BLEProfile*) profileWithDevice:(BLEDevice*)device andAppDelegate:(id<DataExchangerProfileProtocol>)delegate andServiceUUIDStrings:(NSArray*)suuidStrs;
 
 //
 // Change app delegate
@@ -44,6 +46,7 @@ extern NSString* const kDXI2cSetupUUID;
 // - deprecated. Use sendTx:
 //
 - (BOOL) sendTx:(NSData*)data;
+- (BOOL) sendTx:(NSData*)data withResponse:(BOOL)response;
 
 //
 // This method will send data to the Tx port 2 of the connected BLE device
@@ -76,5 +79,7 @@ extern NSString* const kDXI2cSetupUUID;
 // This method will write the TX Credit Report Loop Count
 //
 - (BOOL) writeTxCreditReportLoopCount:(uint32_t)count;
+
+- (BOOL) switchScrambling:(BOOL)isOn;
 
 @end

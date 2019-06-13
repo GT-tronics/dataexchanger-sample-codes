@@ -52,8 +52,38 @@ static DxAppSC* gController2 = nil;
         BOOL enableCmdCh = [defaults boolForKey:@"enableCmdCh"];
         BOOL enableChScrm = [defaults boolForKey:@"enableChScrm"];
         NSInteger proxPwrLvl = [defaults integerForKey:@"proxPwrLvl"];
-
-        gController = [[DxAppSC alloc] initWithDeviceCount:1 proximityPowerLevel:proxPwrLvl discoveryActiveTimeout:5.0 autoConnect:YES enableCommandChannel:enableCmdCh enableChannelScrambler:enableChScrm enableTransmitBackPressure:YES];
+        NSString* suuidListStr = [defaults stringForKey:@"svcUUIDList"];
+        
+        BOOL backToDefault = NO;
+        
+        if( suuidListStr && suuidListStr.length > 0 )
+        {
+            NSArray* suuidStrs = [suuidListStr componentsSeparatedByString:@","];
+            
+            // Verify the UUID string is valid
+            for( NSString* suuidStr in suuidStrs )
+            {
+                if( [[NSUUID alloc] initWithUUIDString:[suuidStr capitalizedString]] == nil )
+                {
+                    backToDefault = YES;
+                    break;
+                }
+            }
+            
+            if( !backToDefault )
+            {
+                gController = [[DxAppSC alloc] initWithDeviceCount:1 proximityPowerLevel:proxPwrLvl discoveryActiveTimeout:5.0 autoConnect:YES enableCommandChannel:enableCmdCh enableChannelScrambler:enableChScrm enableTransmitBackPressure:YES serviceUUIDStrings:suuidStrs];
+            }
+        }
+        else
+        {
+            backToDefault = YES;
+        }
+        
+        if( backToDefault )
+        {
+            gController = [[DxAppSC alloc] initWithDeviceCount:1 proximityPowerLevel:proxPwrLvl discoveryActiveTimeout:5.0 autoConnect:YES enableCommandChannel:enableCmdCh enableChannelScrambler:enableChScrm enableTransmitBackPressure:YES];
+        }
     }
     
     return gController;
@@ -84,6 +114,11 @@ static DxAppSC* gController2 = nil;
 }
 
 - (id) initWithDeviceCount:(NSUInteger)devCount proximityPowerLevel:(float)pwrLevel discoveryActiveTimeout:(NSTimeInterval) timeout autoConnect:(BOOL)autoConnect enableCommandChannel:(BOOL)enableCmdCh enableChannelScrambler:(BOOL)enableChScrm enableTransmitBackPressure:(BOOL)enableTxCredit
+{
+    return [self initWithDeviceCount:devCount proximityPowerLevel:pwrLevel discoveryActiveTimeout:timeout autoConnect:autoConnect enableCommandChannel:enableCmdCh enableChannelScrambler:enableChScrm enableTransmitBackPressure:enableTxCredit serviceUUIDStrings:nil];
+}
+
+- (id) initWithDeviceCount:(NSUInteger)devCount proximityPowerLevel:(float)pwrLevel discoveryActiveTimeout:(NSTimeInterval) timeout autoConnect:(BOOL)autoConnect enableCommandChannel:(BOOL)enableCmdCh enableChannelScrambler:(BOOL)enableChScrm enableTransmitBackPressure:(BOOL)enableTxCredit serviceUUIDStrings:(NSArray*)suuidStrs
 {
     self = [super init];
     if( self == nil )
@@ -147,7 +182,15 @@ static DxAppSC* gController2 = nil;
         }
         
         // 3. Create DataExchanger profile
-        DataExchangerProfile* dxp = (DataExchangerProfile*)[DataExchangerProfile profileWithDevice:device andAppDelegate:self];
+        DataExchangerProfile* dxp;
+        if( suuidStrs == nil )
+        {
+            dxp = (DataExchangerProfile*)[DataExchangerProfile profileWithDevice:device andAppDelegate:self];
+        }
+        else
+        {
+            dxp = (DataExchangerProfile*)[DataExchangerProfile profileWithDevice:device andAppDelegate:self andServiceUUIDStrings:suuidStrs];
+        }
         
         dxp.enableRx2Noti = enableCmdCh;
         dxp.enableChScrmb = enableChScrm;
@@ -472,7 +515,7 @@ static DxAppSC* gController2 = nil;
 
 
 // Write firmware image
-- (BOOL) writeFirmwareImageInSlot:(uint8_t)slotIdx firmwareData:(NSData*)firmData scratchPad:(NSData*)scratchPad progress:(nullable void (^) (NSUInteger stage, double progress))progressHandler complete: (nullable void (^) (NSDictionary* metas, NSError* err))completeHandler
+- (BOOL) writeFirmwareImageInSlot:(uint8_t)slotIdx firmwareData:(NSData*)firmData scratchPad:(NSDictionary*)scratchPad progress:(nullable void (^) (NSUInteger stage, double progress))progressHandler complete: (nullable void (^) (NSDictionary* metas, NSError* err))completeHandler
 {
     NSUUID* devUUID = [[NSUUID alloc] initWithUUIDString:[device.devUUID UUIDString]];
     DxAppFirmLogStateMachine* sm = firmLogSMs[devUUID];
@@ -480,7 +523,7 @@ static DxAppSC* gController2 = nil;
     return [sm writeFirmwareImageInSlot:slotIdx firmwareData:firmData scratchPad:scratchPad progress:progressHandler complete:completeHandler inDevice:device];
 }
 
-- (BOOL) writeFirmwareImageInSlot:(uint8_t)slotIdx firmwareData:(NSData*)firmData scratchPad:(NSData*)scratchPad progress:(nullable void (^) (NSUInteger stage, double progress))progressHandler complete: (nullable void (^) (NSDictionary* metas, NSError* err))completeHandler inDevice:(NSUUID*)uuid
+- (BOOL) writeFirmwareImageInSlot:(uint8_t)slotIdx firmwareData:(NSData*)firmData scratchPad:(NSDictionary*)scratchPad progress:(nullable void (^) (NSUInteger stage, double progress))progressHandler complete: (nullable void (^) (NSDictionary* metas, NSError* err))completeHandler inDevice:(NSUUID*)uuid
 {
     DataExchangerDevice* d = connectedDevices[uuid];
     if( !d )

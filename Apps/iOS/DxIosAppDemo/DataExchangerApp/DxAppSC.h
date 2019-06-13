@@ -12,8 +12,8 @@
 
 @interface DxAppSC : NSObject <DataExchangerDeviceAppDelegateProtocol, DataExchangerProfileProtocol>
 
-@property (nonatomic, assign)   BOOL        enableTxCreditNoti;
-@property (nonatomic, weak)     id          delegate;
+@property (nonatomic, assign)   BOOL            enableTxCreditNoti;
+@property (nonatomic, weak)     id _Nullable    delegate;
 
 + (nullable DxAppSC*)controller;
 + (nullable DxAppSC*)controllerNoConnect;
@@ -22,6 +22,9 @@
 
 
 - (nullable id) initWithDeviceCount:(NSUInteger)devCount proximityPowerLevel:(float)pwrLevel discoveryActiveTimeout:(NSTimeInterval) timeout autoConnect:(BOOL)autoConnect enableCommandChannel:(BOOL)enableCmdCh enableChannelScrambler:(BOOL)enableChScrm enableTransmitBackPressure:(BOOL)enableTxCredit;
+
+- (nullable id) initWithDeviceCount:(NSUInteger)devCount proximityPowerLevel:(float)pwrLevel discoveryActiveTimeout:(NSTimeInterval) timeout autoConnect:(BOOL)autoConnect enableCommandChannel:(BOOL)enableCmdCh enableChannelScrambler:(BOOL)enableChScrm enableTransmitBackPressure:(BOOL)enableTxCredit serviceUUIDStrings:(nullable NSArray*)suuidStrs;
+
 
 - (void) changeProximityConnectPower:(NSInteger)proxPwrLvl;
 
@@ -69,8 +72,8 @@
 - (BOOL) retrieveFirmwareMetaWithProgress:(nullable void (^) (NSUInteger stage, double progress))progressHandler complete:(nullable void (^) (NSDictionary* _Nullable metas, NSError* _Nullable err))completeHandler;
 - (BOOL) retrieveFirmwareMetaWithProgress:(nullable void (^) (NSUInteger stage, double progress))progressHandler complete:(nullable void (^) (NSDictionary* _Nullable metas, NSError* _Nullable err))completeHandler fromDevice:(nonnull NSUUID*)uuid;
 
-- (BOOL) writeFirmwareImageInSlot:(uint8_t)slotIdx firmwareData:(nonnull NSData*)firmData scratchPad:(nullable NSData*)scratchPad progress:(nullable void (^) (NSUInteger stage, double progress))progressHandler complete:(nullable void (^) (NSDictionary* _Nullable metas, NSError* _Nullable err))completeHandler;
-- (BOOL) writeFirmwareImageInSlot:(uint8_t)slotIdx firmwareData:(nonnull NSData*)firmData scratchPad:(nullable NSData*)scratchPad progress:(nullable void (^) (NSUInteger stage, double progress))progressHandler complete:(nullable void (^) (NSDictionary* _Nullable metas, NSError* _Nullable err))completeHandler inDevice:(nonnull NSUUID*)uuid;
+- (BOOL) writeFirmwareImageInSlot:(uint8_t)slotIdx firmwareData:(nonnull NSDictionary*)firmData scratchPad:(nullable NSData*)scratchPad progress:(nullable void (^) (NSUInteger stage, double progress))progressHandler complete:(nullable void (^) (NSDictionary* _Nullable metas, NSError* _Nullable err))completeHandler;
+- (BOOL) writeFirmwareImageInSlot:(uint8_t)slotIdx firmwareData:(nonnull NSDictionary*)firmData scratchPad:(nullable NSData*)scratchPad progress:(nullable void (^) (NSUInteger stage, double progress))progressHandler complete:(nullable void (^) (NSDictionary* _Nullable metas, NSError* _Nullable err))completeHandler inDevice:(nonnull NSUUID*)uuid;
 
 - (BOOL) deleteFirmwareImageFromSlot:(uint8_t)slotIdx progress:(nullable void (^) (NSUInteger stage, double progress))progressHandler complete: (nullable void (^) (NSDictionary* _Nullable metas, NSError* _Nullable err))completeHandler;
 - (BOOL) deleteFirmwareImageFromSlot:(uint8_t)slotIdx progress:(nullable void (^) (NSUInteger stage, double progress))progressHandler complete: (nullable void (^) (NSDictionary* _Nullable metas, NSError* _Nullable err))completeHandler inDevice:(nonnull NSUUID*)uuid;

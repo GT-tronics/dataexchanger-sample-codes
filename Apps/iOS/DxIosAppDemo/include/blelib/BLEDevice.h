@@ -108,6 +108,11 @@ typedef enum
 - (void) shutdown;
 
 //
+// This mehtod will clear up from connecting state
+//
+- (void) clearupFromConnecting;
+
+//
 // This method issue a write request to an attribute specified by Service UUID and
 // Characteristic UUID.
 //
